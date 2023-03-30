@@ -82,21 +82,41 @@ void GUI(int _numRow, int _numCol, int _type, int _printSize) {
 
 		int n = (printSize + 1) / 4;
 
-		yDim = (1 + 2 * n) * numRow - 1;
+		yDim = (1 + 2 * n) + (2 * n) * (numRow - 1);
 		xDim = numCol * (3 * n + 1) + n;
+
+		int _i, index;
+		bool spec;
 
 		//might be a way todo this for each row more easily
 		board = new char* [yDim];
 		for (int i = 0; i < yDim; i++) {
 			board[i] = new char[xDim];
-			int _i = i % (n * 2);
+			_i = i % (n * 2);
+			/*if (_i == 4) {
+				cout << endl;
+			}*/
 			for (int j = 0; j < xDim; j++) {
-				bool spec;
-				spec = false;
+				
+				if (0 < _i && _i <= n) {
+					index = 4 - _i % 4;
+				}
+				else {
+  					index = (_i + 3) % 4;
+				}
+				if (j == index) {
+					spec = true;
+				}
+				else {
+					spec = false;
+				}
 				if (spec) {
-					/*
-					* 4-_i%4||
-					*/
+					if (0 < _i && _i <= n) {
+						board[i][j] = '/';
+					}
+					else {
+						board[i][j] = '\\';
+					}
 				}
 				else {
 					board[i][j] = ' ';

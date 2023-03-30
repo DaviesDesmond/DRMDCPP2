@@ -6,9 +6,9 @@ using namespace std;
 void FRAFO();
 
 int main() {
-	FRAFO();
-	cout << endl;
-	GUI(2, 3, 0, 12);
+	//FRAFO();
+	//cout << endl;
+	GUI(1, 1, 0, 12);
 	return 0;
 }
 
