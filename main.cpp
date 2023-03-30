@@ -8,7 +8,7 @@ void FRAFO();
 int main() {
 	//FRAFO();
 	//cout << endl;
-	GUI(1, 1, 0, 12);
+	GUI(2, 2, 0, 7);
 	return 0;
 }
 
@@ -17,23 +17,23 @@ void FRAFO() {
 	//m2:9
 	//m3d2:4
 	//size:33x13
-	cout << "   \\_________/                _________   " << endl;///
-	cout << "   /         \\               /         \\" << endl;////
-	cout << "  /           \\             /           \\" << endl;///
-	cout << " /             \\           /             \\" << endl;//
+	cout << "   \\_________/               \\_________/   " << endl;///
+	cout << "   /         \\               /         \\   " << endl;////
+	cout << "  /           \\             /           \\  " << endl;///
+	cout << " /             \\           /             \\ " << endl;//
 	cout << "/               \\_________/               \\" << endl;//
 	cout << "\\               /         \\               /" << endl;//
-	cout << " \\             /           \\             /" << endl;//
-	cout << "  \\           /             \\           /" << endl;///
-	cout << "   \\_________/               \\_________/" << endl;////
-	cout << "   /         \\               /         \\" << endl;////
-	cout << "  /           \\             /           \\" << endl;///
-	cout << " /             \\           /             \\" << endl;//
+	cout << " \\             /           \\             / " << endl;//
+	cout << "  \\           /             \\           /  " << endl;///
+	cout << "   \\_________/               \\_________/   " << endl;////
+	cout << "   /         \\               /         \\   " << endl;////
+	cout << "  /           \\             /           \\  " << endl;///
+	cout << " /             \\           /             \\ " << endl;//
 	cout << "/               \\_________/               \\" << endl;//
 	cout << "\\               /         \\               /" << endl;//
-	cout << " \\             /           \\             /" << endl;//
-	cout << "  \\           /             \\           /" << endl;///
-	cout << "   \\_________/               \\_________/" << endl;////
+	cout << " \\             /           \\             / " << endl;//
+	cout << "  \\           /             \\           /  " << endl;///
+	cout << "   \\_________/               \\_________/   " << endl;////
 
 
 	//cout << "  /       \\           /       \\" << endl;////
@@ -45,8 +45,7 @@ void FRAFO() {
 }
 
 //hex
-//cout << "  _____  " << endl;
-//cout << " /     \\" << endl;
+//cout << "  _____\\" << endl;
 //cout << "/       \\" << endl;
 //cout << "\\       /" << endl;
 //cout << " \\_____/" << endl;

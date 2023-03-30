@@ -19,6 +19,9 @@ using namespace::std;
 //
 //}
 
+int incrementIndex(int i, int n);
+
+
 void GUI(int _numRow, int _numCol, int _type, int _printSize) {
 	//assuming that the inputs have been sterilized already (type is 1/0, others are positive non-0 integers)
 	int numRow = _numRow,
@@ -44,7 +47,7 @@ void GUI(int _numRow, int _numCol, int _type, int _printSize) {
 	}
 	else { 
 		if (printSize <= minSize) {
-			printSize = 11;
+			printSize = 7;
 		}
 		else {
 			printSize += 3 - printSize % 4;
@@ -74,7 +77,7 @@ void GUI(int _numRow, int _numCol, int _type, int _printSize) {
 		* numSlope -1 + 4n
 		* Height 1 + 2n
 		* slope n
-		* top 1 + 4n
+		* top 1 + 2n
 		* width of board: (numSlope) + (numCol)*(numSlope+top)
 		* n + numCol*(2n + 1)
 		* height of board: height*numCol -1
@@ -87,6 +90,7 @@ void GUI(int _numRow, int _numCol, int _type, int _printSize) {
 
 		int _i, index;
 		bool spec;
+		char nextChar;
 
 		//might be a way todo this for each row more easily
 		board = new char* [yDim];
@@ -96,14 +100,19 @@ void GUI(int _numRow, int _numCol, int _type, int _printSize) {
 			/*if (_i == 4) {
 				cout << endl;
 			}*/
+			if (0 < _i && _i <= n) {
+				//this calculates when the slopes will happen for this row
+				//it also needs to do this if 
+				index = n - n * (_i / n) - _i % n;
+				nextChar = '/';
+			}
+			else {
+				index = (_i + n - 1) % n;
+				nextChar = '\\';
+			}
 			for (int j = 0; j < xDim; j++) {
 				
-				if (0 < _i && _i <= n) {
-					index = 4 - _i % 4;
-				}
-				else {
-  					index = (_i + 3) % 4;
-				}
+				
 				if (j == index) {
 					spec = true;
 				}
@@ -112,10 +121,18 @@ void GUI(int _numRow, int _numCol, int _type, int _printSize) {
 				}
 				if (spec) {
 					if (0 < _i && _i <= n) {
-						board[i][j] = '/';
+						board[i][j] = nextChar;
+						index = incrementIndex(index, n);
 					}
 					else {
-						board[i][j] = '\\';
+						board[i][j] = nextChar;
+						index = incrementIndex(index, n);
+					}
+					if (nextChar == '/') {
+						nextChar = '\\';
+					}
+					else {
+						nextChar = '/';
 					}
 				}
 				else {
@@ -138,4 +155,14 @@ void GUI(int _numRow, int _numCol, int _type, int _printSize) {
 			cout << endl;
 		}
 	}
+}
+
+
+int incrementIndex(int i, int n) {
+	int baseIndex = i;
+	while (baseIndex - (1 + 3 * n) >= 0) {
+		baseIndex -= 1 + 3 * n;
+	}
+	int retVal = i + 2 + n * 2 + ((n - 1) - baseIndex) * 2;
+	return retVal;
 }
