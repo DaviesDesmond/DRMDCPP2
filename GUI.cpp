@@ -1,7 +1,7 @@
 #include "GUI.h"
 #include "dungeon.h"
 #include<iostream>
-#include <cstdlib>
+#include<cstdlib>
 
 using namespace::std;
 
@@ -89,20 +89,22 @@ void GUI(int _numRow, int _numCol, int _type, int _printSize) {
 		xDim = numCol * (3 * n + 1) + n;
 
 		int _i, index;
-		bool spec;
+		bool doSlash,
+			 doUnder = false;
 		char nextChar;
 
 		//might be a way todo this for each row more easily
 		board = new char* [yDim];
 		for (int i = 0; i < yDim; i++) {
 			board[i] = new char[xDim];
+			
+			//Checking which unique row we are in to avoid duplicate characters
 			_i = i % (n * 2);
-			/*if (_i == 4) {
-				cout << endl;
-			}*/
+			
+
 			if (0 < _i && _i <= n) {
 				//this calculates when the slopes will happen for this row
-				//it also needs to do this if 
+				//the first n lines 
 				index = n - n * (_i / n) - _i % n;
 				nextChar = '/';
 			}
@@ -114,12 +116,12 @@ void GUI(int _numRow, int _numCol, int _type, int _printSize) {
 				
 				
 				if (j == index) {
-					spec = true;
+					doSlash = true;
 				}
 				else {
-					spec = false;
+					doSlash = false;
 				}
-				if (spec) {
+				if (doSlash) {
 					if (0 < _i && _i <= n) {
 						board[i][j] = nextChar;
 						index = incrementIndex(index, n);
@@ -130,16 +132,26 @@ void GUI(int _numRow, int _numCol, int _type, int _printSize) {
 					}
 					if (nextChar == '/') {
 						nextChar = '\\';
+						doUnder = false;
 					}
 					else {
 						nextChar = '/';
+						doUnder = true;
 					}
 				}
-				else {
+				//need to calculate if we are in the area that needs dashes
+				// only needs to happen in rows 0 and ((1+2n)+1/2)(the middle row)
+				else if((_i == 0 || _i == (n)) && doUnder) {
+					board[i][j] = '_';
+				}
+				
+				else{
 					board[i][j] = ' ';
 				}
-
+				
 			}
+			
+			
 		}
 
 
@@ -159,6 +171,14 @@ void GUI(int _numRow, int _numCol, int _type, int _printSize) {
 
 
 int incrementIndex(int i, int n) {
+	/*
+	* INPUTS:
+	*	i: the column that the most recent slash was in
+	*	n: the n value of the current grid
+	* Returns:
+	*	
+	*/
+	
 	int baseIndex = i;
 	while (baseIndex - (1 + 3 * n) >= 0) {
 		baseIndex -= 1 + 3 * n;
